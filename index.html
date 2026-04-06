@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste N8N</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+        }
+        body{
+            height: 100vh;
+            width: 100vw;
+            background-color: #dedede;
+            overflow-x: hidden; 
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .App{
+            height: 100%;
+            width: 100%;
+            display: flex;  
+            flex-direction: column;
+            /* justify-content: center; */
+            align-items: center;
+        }
+
+        .App div{
+            background-color: white;
+            width: 80%; 
+            max-width: 400px;
+            padding: 6px 10px;
+            border-radius: 9px;
+        }
+        
+        .errContainer{
+            border: 1px solid;
+            color: firebrick;
+            text-align: center;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .formContainer{
+            /* height: 82%; */
+            margin-top: 50px;
+            text-align: center;
+            border: 1px solid rgb(72, 72, 158);
+            
+            h2{
+                color: rgb(36, 36, 141);
+                font-size: 20px;
+                margin-bottom: 5px;
+            }
+            
+            h3{
+                font-size: 12px;
+                font-weight: 100;
+                margin-bottom: 20px;
+                color: #666666;
+            }
+
+            form{
+                text-align: start;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                fieldset{
+                    color: rgb(36, 36, 141);
+                    padding: 5px;
+                    margin-bottom: 10px;
+                    width: stretch;
+                }
+                input{
+                    width: calc(100% - 10px);
+                    border: none;
+                    
+
+                }
+                fieldset[textarea]{
+                    height: 10vh;
+                    
+                    textarea{
+                        width: calc(100% - 10px);
+                        border: none;
+                        outline: none;
+                        height: 5vh;
+                    }
+                }
+                input[type="submit"]{
+                    background-color: rgb(36, 36, 141);
+                    width: 20%;
+                    padding: 9px 14px;
+                    color: white;
+                    border-radius: 9px;
+                
+                }
+
+                fieldset[estiloMusical]{
+                    display: flex;
+                    flex-wrap: wrap;
+                    flex-direction: row;
+
+                    p{
+                        margin-left: 5px;
+                        font-size: 14px;
+                        width: stretch;
+                        margin-bottom: 5px;
+                        color: #666666;
+                        font-family:  Arial, Helvetica, sans-serif;
+
+                    }
+
+                    .cbBallom{
+                        font-size: 13px;
+                        border: 1px solid rgb(72, 72, 158);
+                        margin: 5px 2.5px;
+                        width: fit-content;
+                        cursor: pointer
+                    }
+
+                    .cbBallom.active{
+                        background-color: rgb(36, 36, 141);
+                        color: #fff;
+                        z-index: 5;
+                    }
+
+                    label{
+                        pointer-events: none;
+                    }
+                    input[type="checkbox"]{
+                        display: none;
+                    }
+                }
+            }
+
+        }
+
+        button[wppBtn]{
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            height: 50px;
+            width: 50px;
+            font-size: 30px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background-color: #25d366;
+            color: #064740;
+            text-align: center;
+            line-height: 25px;
+
+            i{
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="App">
+        <button wppBtn><i class="fa-brands fa-whatsapp"></i></button>
+        <div class="errContainer">
+            <p errorMessege> Preencha todo o formulário</p>
+        </div>
+        <div class="formContainer">
+            <h2>Complete o formulário</h2>
+            <h3>Preencha todo o formulário para que a musica saia do jeito que você deseja.</h3>
+            <form action="https://gr1f1nd0r.app.n8n.cloud/webhook/payment" method="POST">
+                <fieldset>
+                    <legend>Digite seu nome</legend>
+                    <input type="text" name="nome" placeholder="Ex: Meunome">
+                </fieldset>
+                <fieldset>
+                    <legend>Digite seu email</legend>
+                    <input type="email" name="email" placeholder="Ex: meuEmail@email.com">
+                </fieldset>
+                <fieldset>
+                    <legend>Seu whatsapp (COM DDD)</legend>
+                    <input type="number" name="whatsapp" placeholder="Ex:21966086873">
+                </fieldset>
+                <fieldset>
+                    <legend>Para quem é a música?</legend>
+                    <input type="text" name="destinatario" placeholder="Ex: minha namorada Ana, minha mãe...">
+                </fieldset>
+                <fieldset>
+                    <legend>Qual é a ocasião?</legend>
+                    <input type="text" name="ocasiao" placeholder="Ex: aniversário, pedido de casamento, chá de bebê...">
+                </fieldset>
+                <fieldset textarea>
+                    <legend>O que você quer expressar?</legend>
+                    <textarea name="descricao" placeholder="Ex: Quero dizer que ela é a pessoa mais importante da minha vida, falar das viagens que fizemos juntos e como ela me faz sorrir todo dia..."></textarea>
+                </fieldset>
+                <fieldset estiloMusical>
+                    <legend>Estilo Musical</legend>
+                    <p>Selecione o estilo musical: </p>
+                    <br>
+
+                    <div class="cbBallom">
+                        <input type="checkbox" name="estilo" id="romanticoCB" value="romântico">
+                        <label for="romanticoCB">Romântico</label>
+                    </div>
+
+                    <div class="cbBallom">
+                        <input type="checkbox" name="estilo" id="sertanejoCB" value="sertanejo">
+                        <label for="sertanejoCB">Sertanejo</label>
+                    </div>
+
+                    <div class="cbBallom">
+                        <input type="checkbox" name="estilo" id="gospelCB" value="gospel">
+                        <label for="gospelCB">Gospel</label>
+                    </div>
+
+                    <div class="cbBallom">
+                        <input type="checkbox" name="estilo" id="pagodeCB" value="pagode">
+                        <label for="pagodeCB">Pagode</label>
+                    </div>
+
+                    <div class="cbBallom">
+                        <input type="checkbox" name="estilo" id="funkCB" value="funk">
+                        <label for="funkCB">Funk</label>
+                    </div>
+
+                    <div class="cbBallom">
+                        <input type="checkbox" name="estilo" id="sambaCB" value="samba">
+                        <label for="sambaCB">Samba</label>
+                    </div>
+
+                </fieldset>
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+    <script>
+        try {
+            const wppBtn = document.querySelector("button[wppBtn]")
+            const wppURL = "https://wa.me/5521966086873"
+            const cbBalloms = document.querySelectorAll(".cbBallom")
+
+            cbBalloms.forEach((ballom) => {
+                ballom.addEventListener('click', () => {
+                    ballom.classList.toggle("active")
+                    var cb = ballom.querySelector("input[type='checkbox']")
+                    cb.checked = ballom.classList.contains("active") ? true : false
+
+                    console.log(`O balão ${cb.id} foi ${cb.checked ? "ativado" : "desativado"} !`)
+                })
+            })
+
+            wppBtn.addEventListener('click', () => window.open(wppURL, '_blank'))
+        } catch (e) {
+            alert(e.message)
+        }
+    </script>
+</body>
+</html>
